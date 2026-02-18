@@ -1,0 +1,1 @@
+I have created a blog at "C:\Users\pc\BizfirstAI\BlogWebsite\Blogifier". I want you to modify the text in upperframe from "BizFirstAI" to "Home" and move its position to right after links for git,x,facebook,youtube etc.

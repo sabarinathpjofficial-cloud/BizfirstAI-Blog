@@ -1,0 +1,186 @@
+/* ===== BizFirstAI Dark Theme ===== */
+
+/* Override Bootstrap CSS Variables */
+:root {
+    --bs-body-bg: #0B0C10 !important;
+    --bs-body-color: #E5E5E5 !important;
+    --bs-body-bg-rgb: 11, 12, 16 !important;
+    --bs-body-color-rgb: 229, 229, 229 !important;
+    --bs-link-color: #1AFF00 !important;
+    --bs-link-hover-color: #16E600 !important;
+}
+
+/* Page background */
+html, body {
+    background-color: #0B0C10 !important;
+    color: #E5E5E5 !important;
+}
+
+/* Container backgrounds */
+.container, main {
+    background-color: transparent !important;
+}
+
+/* Header */
+.header, header, nav, .navbar {
+    background-color: #111827 !important;
+    border-bottom: 2px solid #1AFF00 !important;
+    color: #FFFFFF !important;
+}
+
+/* Header title and logo */
+.header-title,
+.header a,
+.navbar-brand,
+nav a {
+    color: #FFFFFF !important;
+}
+
+.header a:hover,
+.navbar-brand:hover,
+nav a:hover {
+    color: #1AFF00 !important;
+}
+
+/* Navigation */
+.nav a {
+    color: #E5E5E5 !important;
+}
+
+.nav a:hover {
+    color: #1AFF00 !important;
+}
+
+/* Cards and Posts */
+.card,
+.post,
+.post-item,
+.post-card,
+.item {
+    background-color: #1F1F1F !important;
+    border: 1px solid #2a2a2a !important;
+    color: #E5E5E5 !important;
+}
+
+.card-body,
+.card-title,
+.card-text,
+.post-title,
+.post-content,
+.post-excerpt {
+    color: #E5E5E5 !important;
+}
+
+/* Footer */
+.footer, footer {
+    background-color: #111827 !important;
+    color: #E5E5E5 !important;
+    border-top: 2px solid #1AFF00 !important;
+}
+
+.footer a, footer a {
+    color: #1AFF00 !important;
+}
+
+.footer a:hover, footer a:hover {
+    color: #16E600 !important;
+}
+
+/* Links */
+a {
+    color: #1AFF00 !important;
+}
+
+a:hover {
+    color: #16E600 !important;
+}
+
+/* Buttons */
+.btn-primary,
+button.btn-primary {
+    background-color: #1AFF00 !important;
+    border-color: #1AFF00 !important;
+    color: #0B0C10 !important;
+}
+
+.btn-primary:hover,
+button.btn-primary:hover {
+    background-color: #16E600 !important;
+    border-color: #16E600 !important;
+}
+
+/* Forms */
+input,
+textarea,
+select,
+.form-control {
+    background-color: #1F1F1F !important;
+    border: 1px solid #2a2a2a !important;
+    color: #E5E5E5 !important;
+}
+
+input:focus,
+textarea:focus,
+select:focus,
+.form-control:focus {
+    background-color: #2a2a2a !important;
+    border-color: #1AFF00 !important;
+    color: #E5E5E5 !important;
+}
+
+/* Pagination */
+.pagination .page-link {
+    background-color: #1F1F1F !important;
+    border-color: #2a2a2a !important;
+    color: #E5E5E5 !important;
+}
+
+.pagination .page-link:hover {
+    background-color: #2a2a2a !important;
+    border-color: #1AFF00 !important;
+    color: #1AFF00 !important;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #1AFF00 !important;
+    border-color: #1AFF00 !important;
+    color: #0B0C10 !important;
+}
+
+/* Text colors */
+h1, h2, h3, h4, h5, h6,
+.text-dark {
+    color: #E5E5E5 !important;
+}
+
+p, span, div {
+    color: inherit;
+}
+
+/* Featured post */
+.featured,
+.featured-post {
+    background-color: #1F1F1F !important;
+    border: 1px solid #1AFF00 !important;
+}
+
+/* Sidebar */
+.sidebar {
+    background-color: #1F1F1F !important;
+    border: 1px solid #2a2a2a !important;
+}
+
+/* Modal/Dialog */
+.modal-content {
+    background-color: #1F1F1F !important;
+    border: 1px solid #2a2a2a !important;
+    color: #E5E5E5 !important;
+}
+
+.modal-header {
+    border-bottom-color: #2a2a2a !important;
+}
+
+.modal-footer {
+    border-top-color: #2a2a2a !important;
+}
