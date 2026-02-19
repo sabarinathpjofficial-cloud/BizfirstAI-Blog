@@ -82,6 +82,7 @@
   <div class="easymde-wrapper">
     <textarea @ref="_textareaReference" tabindex="2" class="visually-hidden" placeholder="@_localizer["type-here"]"></textarea>
     <InputFile @ref="_inputFileReference" OnChange="@LoadImageFiles" style="display:none;" accept="image/*" />
+    <InputFile @ref="_inputDocumentReference" OnChange="@LoadDocumentFiles" style="display:none;" accept=".pdf,.html,.doc,.docx,.xls,.xlsx,.zip,.7z" />
   </div>
 </div>
 
@@ -94,13 +95,15 @@
   private ElementReference? _textareaReference;
   private InputFile? _inputFileReference;
   private InputFile? _inputCovereference;
+  private InputFile? _inputDocumentReference;
 
   protected override async Task OnAfterRenderAsync(bool firstRender)
   {
     if (firstRender)
     {
-      var element = _inputFileReference?.Element;
-      await _editorJsInterop.LoadEditorAsync(_textareaReference, element);
+      var imageElement = _inputFileReference?.Element;
+      var documentElement = _inputDocumentReference?.Element;
+      await _editorJsInterop.LoadEditorAsync(_textareaReference, imageElement, documentElement);
     }
   }
 
@@ -135,6 +138,12 @@
   {
     var element = _inputFileReference?.Element;
     await _editorJsInterop.WriteFrontFileAsync(element);
+  }
+
+  protected async Task LoadDocumentFiles(InputFileChangeEventArgs args)
+  {
+    var element = _inputDocumentReference?.Element;
+    await _editorJsInterop.WriteDocumentFileAsync(element);
   }
 
   protected async Task SaveCoreAsync(PostState postState)

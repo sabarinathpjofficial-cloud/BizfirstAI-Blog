@@ -29,7 +29,7 @@ public static class BlogifierConstant
   public const string StorageRowPhysicalRoot = "/row";
 
   public static readonly string[] FileExtensions = new string[]
-  { "png", "gif", "jpeg", "jpg", "zip", "7z", "pdf", "doc", "docx", "xls", "xlsx", "mp3", "mp4", "avi" };
+  { "png", "gif", "jpeg", "jpg", "zip", "7z", "pdf", "doc", "docx", "xls", "xlsx", "mp3", "mp4", "avi", "html" };
 
   #region NotUse
   public const string DefaultTitle = "Blog Title";

@@ -24,8 +24,13 @@ html, body {
 /* Header */
 .header, header, nav, .navbar {
     background-color: #111827 !important;
-    border-bottom: 2px solid #1AFF00 !important;
+    border-bottom: none !important;
     color: #FFFFFF !important;
+}
+
+.header-nav-link,
+.header-nav-button {
+    text-decoration: none !important;
 }
 
 /* Header title and logo */

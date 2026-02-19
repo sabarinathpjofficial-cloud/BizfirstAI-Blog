@@ -22,6 +22,7 @@ const
   , editorIcon_preview = `<svg fill="currentColor" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M12 11H4V12H12V11Z" /><path d="M4 8H12V9H4V8Z" /><path d="M9 5H4V6H9V5Z" /><path fill-rule="evenodd" clip-rule="evenodd" d="M0 3C0 1.34314 1.34314 0 3 0H13C14.6569 0 16 1.34314 16 3V13C16 14.6569 14.6569 16 13 16H3C1.34314 16 0 14.6569 0 13V3ZM3 1H13C14.1046 1 15 1.89542 15 3V13C15 14.1046 14.1046 15 13 15H3C1.89545 15 1 14.1046 1 13V3C1 1.89542 1.89545 1 3 1Z" /></svg>`
   , editorIcon_sidebyside = `<svg fill="currentColor" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M0 3C0 1.34315 1.34315 0 3 0H13C14.6569 0 16 1.34315 16 3V13C16 14.6569 14.6569 16 13 16H3C1.34315 16 0 14.6569 0 13V3ZM8.5 1H13C14.1046 1 15 1.89543 15 3V13C15 14.1046 14.1046 15 13 15H8.5V1ZM7.5 1H3C1.89543 1 1 1.89543 1 3V13C1 14.1046 1.89543 15 3 15H7.5V1Z" /></svg>`
   , editorIcon_fullscreen = `<svg fill="currentColor" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M11 1H13C14.1046 1 15 1.89543 15 3V5H16V3C16 1.34315 14.6569 0 13 0H11V1Z" /><path d="M5 1V0H3C1.34315 0 0 1.34315 0 3V5H1V3C1 1.89543 1.89543 1 3 1H5Z" /><path d="M1 11H0V13C0 14.6569 1.34315 16 3 16H5V15H3C1.89543 15 1 14.1046 1 13V11Z" /><path d="M11 15V16H13C14.6569 16 16 14.6569 16 13V11H15V13C15 14.1046 14.1046 15 13 15H11Z" /></svg>`
+  , editorIcon_document = `<svg fill="currentColor" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M4 0C2.89543 0 2 0.895431 2 2V14C2 15.1046 2.89543 16 4 16H12C13.1046 16 14 15.1046 14 14V5.41421L8.58579 0H4ZM3 2C3 1.44772 3.44772 1 4 1H8V5C8 5.55228 8.44772 6 9 6H13V14C13 14.5523 12.5523 15 12 15H4C3.44772 15 3 14.5523 3 14V2ZM12.5858 5H9V1.41421L12.5858 5ZM5 8C5 7.72386 5.22386 7.5 5.5 7.5H10.5C10.7761 7.5 11 7.72386 11 8C11 8.27614 10.7761 8.5 10.5 8.5H5.5C5.22386 8.5 5 8.27614 5 8ZM5.5 10.5C5.22386 10.5 5 10.7239 5 11C5 11.2761 5.22386 11.5 5.5 11.5H10.5C10.7761 11.5 11 11.2761 11 11C11 10.7239 10.7761 10.5 10.5 10.5H5.5ZM5 13C5 12.7239 5.22386 12.5 5.5 12.5H8.5C8.77614 12.5 9 12.7239 9 13C9 13.2761 8.77614 13.5 8.5 13.5H5.5C5.22386 13.5 5 13.2761 5 13Z"/></svg>`
   ;
 
 const
@@ -130,6 +131,12 @@ const
     icon: editorIcon_fullscreen,
     title: "Toggle Fullscreen",
     noDisable: true,
+  },
+  editorToolbar_document = {
+    name: "document",
+    action: insertDocument,
+    icon: editorIcon_document,
+    title: "Upload Document (PDF, HTML, DOC, DOCX, XLS, XLSX)",
   };
 
 const fullToolbar = [
@@ -149,6 +156,7 @@ const fullToolbar = [
   editorToolbar_link,
   editorToolbar_image,
   editorToolbar_video,
+  editorToolbar_document,
   "|",
   editorToolbar_preview,
   editorToolbar_sidebyside,
@@ -168,6 +176,7 @@ const miniToolbar = [
   editorToolbar_link,
   editorToolbar_image,
   editorToolbar_video,
+  editorToolbar_document,
   "|",
   editorToolbar_preview,
 ];
@@ -209,10 +218,12 @@ function editorToolbarTooltip() {
 
 let easymde;
 let _uploadElement;
+let _documentUploadElement;
 
 
-export function loadEditor(toolbar, textareaElement, uploadElement) {
+export function loadEditor(toolbar, textareaElement, uploadElement, documentUploadElement) {
   _uploadElement = uploadElement;
+  _documentUploadElement = documentUploadElement;
   autosize(document.querySelectorAll('.autosize'));
   let selectedToolbar = fullToolbar;
   if (toolbar == "miniToolbar") {
@@ -259,6 +270,20 @@ function toggleSideBySide() {
 // Image Upload
 async function insertImage(editor) {
   _uploadElement.click();
+}
+
+// Document Upload (PDF, HTML, DOC, DOCX, XLS, XLSX)
+async function insertDocument(editor) {
+  _documentUploadElement.click();
+}
+
+export function writeDocumentFile(inputElement) {
+  const file = inputElement.files[0];
+  const fileName = file.name;
+  const url = URL.createObjectURL(file);
+  let output = '\r\n[' + fileName + '](' + url + ')';
+  let codemirror = easymde.codemirror;
+  codemirror.replaceSelection(output);
 }
 
 export function setEditorValue(txt) {

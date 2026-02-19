@@ -1,6 +1,6 @@
 .header {
-  padding-top: 4rem;
-  padding-bottom: 4rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 
   &-title {
     display: inline-block;
@@ -26,6 +26,7 @@
 
   &-logo {
     display: block;
+    text-decoration: none;
     &-img {
       width: var(--bf-header-logo-width);
       height: var(--bf-header-logo-height);

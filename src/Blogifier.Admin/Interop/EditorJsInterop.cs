@@ -10,10 +10,10 @@ public class EditorJsInterop(IJSRuntime jsRuntime) : IAsyncDisposable
   private readonly Lazy<Task<IJSObjectReference>> moduleTask = new(() =>
    jsRuntime.InvokeAsync<IJSObjectReference>("import", "./admin/js/editor.js").AsTask());
 
-  public async ValueTask LoadEditorAsync(ElementReference? textarea, ElementReference? imageUpload, string toolbar = "fullToolbar")
+  public async ValueTask LoadEditorAsync(ElementReference? textarea, ElementReference? imageUpload, ElementReference? documentUpload = null, string toolbar = "fullToolbar")
   {
     var module = await moduleTask.Value;
-    await module.InvokeVoidAsync("loadEditor", toolbar, textarea, imageUpload);
+    await module.InvokeVoidAsync("loadEditor", toolbar, textarea, imageUpload, documentUpload);
   }
 
   public async ValueTask SetEditorValueAsync(string content)
@@ -33,6 +33,12 @@ public class EditorJsInterop(IJSRuntime jsRuntime) : IAsyncDisposable
   {
     var module = await moduleTask.Value;
     await module.InvokeVoidAsync("writeFrontFile", imageUpload);
+  }
+
+  public async ValueTask WriteDocumentFileAsync(ElementReference? documentUpload)
+  {
+    var module = await moduleTask.Value;
+    await module.InvokeVoidAsync("writeDocumentFile", documentUpload);
   }
 
   public async ValueTask DisposeAsync()
