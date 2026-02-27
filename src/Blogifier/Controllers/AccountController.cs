@@ -141,7 +141,7 @@ public class AccountController(
   public async Task<IActionResult> Profile([FromQuery] AccountModel parameter)
   {
     var userId = User.FirstUserId();
-    var user = await _userManager.FindByIdAsync(userId);
+    var user = await _userManager.FindByIdAsync(userId.ToString());
     var model = new AccountProfileEditModel
     {
       RedirectUri = parameter.RedirectUri,
@@ -162,19 +162,22 @@ public class AccountController(
     if (ModelState.IsValid)
     {
       var userId = User.FirstUserId();
-      var user = await _userManager.FindByIdAsync(userId);
-      user.Email = model.Email;
-      user.NickName = model.NickName;
-      user.Avatar = model.Avatar;
-      user.Bio = model.Bio;
-      var result = await _userManager.UpdateAsync(user);
-      if (result.Succeeded)
+      var user = await _userManager.FindByIdAsync(userId.ToString());
+      if (user != null)
       {
-        await _signInManager.SignInAsync(user, isPersistent: true);
-      }
-      else
-      {
-        model.Error = result.Errors.FirstOrDefault()?.Description;
+        user.Email = model.Email;
+        user.NickName = model.NickName;
+        user.Avatar = model.Avatar;
+        user.Bio = model.Bio;
+        var result = await _userManager.UpdateAsync(user);
+        if (result.Succeeded)
+        {
+          await _signInManager.SignInAsync(user, isPersistent: true);
+        }
+        else
+        {
+          model.Error = result.Errors.FirstOrDefault()?.Description;
+        }
       }
     }
     var data = await _blogManager.GetAsync();
